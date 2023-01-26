@@ -7,8 +7,7 @@
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "my_node.hpp"
-#include "my_singleton.hpp"
+#include "gdastar.hpp"
 
 using namespace godot;
 
@@ -18,21 +17,14 @@ void gdextension_initialize(ModuleInitializationLevel p_level)
 {
 	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE)
 	{
-		ClassDB::register_class<MyNode>();
-		ClassDB::register_class<MySingleton>();
-
-		_my_singleton = memnew(MySingleton);
-		Engine::get_singleton()->register_singleton("MySingleton", MySingleton::get_singleton());
+		ClassDB::register_class<GDAstar3D>();
+		ClassDB::register_class<GDAstar2D>();
 	}
 }
 
 void gdextension_terminate(ModuleInitializationLevel p_level)
 {
-	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE)
-	{
-		Engine::get_singleton()->unregister_singleton("MySingleton");
-		memdelete(_my_singleton);
-	}
+	
 }
 
 extern "C"
